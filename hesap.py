@@ -1,31 +1,24 @@
-def add(a, b):
-    return a + b
-def subtract(a, b):
-    return a - b
-def multiply(a, b):
-    return a * b
-def divide(a, b):
-    if b == 0:
-        return "Cannot divide by zero!"
-    return a / b
+import random
+import string
 
-print("🧮 Simple Calculator 🧮")
-print("1 - Addition")
-print("2 - Subtraction")
-print("3 - Multiplication")
-print("4 - Division")
+def generate_password(length):
+    if length < 4:
+        return "Password must be at least 4 characters long!"
+    if length > 100:
+        return "Password too long! Please choose less than 100 characters."
+    
+    #character pool: letters (upper.lower), digits, punctuation
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+# 🎨 Title block
+print("=" * 35)
+print("🔐 Strong Password Generator")
+print("=" * 35)
 
-choice = input("Select an operation (1/2/3/4): ")
-num1 = float(input("Enter the first number: "))
-num2 = float(input("Enter the second number: "))
-
-if choice == "1":
-    print("Result:", add(num1, num2))
-elif choice == "2":
-    print("Result:", subtract(num1, num2))
-elif choice == "3":
-    print("Result:", multiply(num1, num2))
-elif choice == "4":
-    print("Result:", divide(num1, num2))
-else:
-    print("Invalid selection.")
+try:
+    user_length = int(input("Enter desired password length: "))
+    result = generate_password(user_length)
+    print(f"✅ Generated password: {result}")
+except ValueError:
+    print("⚠️ Please enter a valid number.")
